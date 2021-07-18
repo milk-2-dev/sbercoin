@@ -1,0 +1,52 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	-webkit-tap-highlight-color: transparent;
+}
+html{
+	scroll-behavior: smooth;
+}
+body {
+	font-family: "Roboto", sans-serif;
+	font-weight: 400;
+	color: #000;
+}
+
+button,
+input,
+a,
+ul,
+li,
+ol,
+select {
+	border: none;
+	color: inherit;
+	background-color: transparent;
+	list-style-type: none;
+	text-decoration: none;
+	outline: none;
+}
+
+button {
+	cursor: pointer;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+
+img, video {
+	width: 100%;
+	height: auto;
+}
+
+.container {
+	margin: 0 auto;
+	max-width: 1332px;
+	padding: 0 10px;
+}

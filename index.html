@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SBER COIN</title>
+    <link rel="icon" href="img/logo-icon.svg" />
+    <!-- styles -->
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- styles end -->
+  </head>
+  <body>
+    <!-- preloader -->
+    <div class="preloader">
+      <img src="img/logo.svg" alt="logo image" width="164" height="32" class="preloader__logo" />
+    </div>
+    <!-- preloader end -->
+    <!-- header -->
+    <header class="header">
+      <div class="container">
+        <div class="header__inner">
+          <div class="logo header__logo">
+            <a href="#" class="logo__link">
+              <img src="img/logo.svg" alt="logo image" width="164" height="32" class="logo__img" />
+            </a>
+          </div>
+          <nav class="menu header__menu">
+            <ul class="menu__list">
+              <li class="menu__item">
+                <a href="#info" class="menu__link">Преимущества</a>
+              </li>
+              <li class="menu__item">
+                <a href="#calc" class="menu__link">Калькулятор</a>
+              </li>
+              <li class="menu__item">
+                <a href="#big-info" class="menu__link">Сберкоин+</a>
+              </li>
+              <li class="menu__item">
+                <a href="#exchange-rate" class="menu__link">Курсы валют</a>
+              </li>
+              <li class="menu__item">
+                <a href="#license" class="menu__link">Лицензия</a>
+              </li>
+              <li class="menu__item">
+                <a href="#steps" class="menu__link">Как инвестировать</a>
+              </li>
+            </ul>
+          </nav>
+          <div class="burger header__burger">
+            <div class="burger__item"></div>
+            <div class="burger__item"></div>
+            <div class="burger__item"></div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- header -->
+    <!-- root -->
+    <div id="root">
+      <section class="main-screen test">
+        <div class="container">
+          <div class="main-screen__inner">
+            <div class="main-screen__text-box">
+              <h1 class="main-screen__heading">Получай дивиденды от 4000$ в неделю</h1>
+              <p class="main-screen__description">Стань в число первых обладателей цифровой валюты от самого большого банка РФ</p>
+            </div>
+            <div class="main-screen__content">
+              <div class="main-screen__video-box">
+                <video class="main-screen__video" src="img/video.mp4" poster="img/video-poster.png" controlsList="nodownload"></video>
+                <button class="main-screen__video-button">
+                  <img src="img/play-btn.svg" alt="play btn" width="92" height="92" class="main-screen__video-button-icon" />
+                </button>
+              </div>
+              <form method="POST" class="form main-screen__form">
+                <label class="form__label">
+                  <span class="form__name">ФИО</span>
+                  <input type="text" class="form__input" placeholder="Иван Иванович" />
+                </label>
+                <label class="form__label">
+                  <span class="form__name">Email</span>
+                  <input type="text" class="form__input" placeholder="ivan@gmail.com" />
+                </label>
+                <label class="form__label">
+                  <span class="form__name">Телефон</span>
+                  <input type="tel" class="form__input" placeholder="+1 1234 5678" />
+                </label>
+                <button class="button form__button">
+                  <span class="button__content">
+                    <span class="button__text">Подать заявку</span>
+                    <img src="img/arrow-right.svg" alt="arrow right direction" width="16" height="16" class="button__icon" />
+                  </span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="colored-text">
+        <div class="container">
+          <div class="colored-text__inner">
+            <h1 class="colored-text__heading">Сберкоин задуман как финансовый актив и нативный расчетный инструмент в блокчейн сети Сбербанка - крупнейшего банка России. По итогам 2019 года у «Сбербанка» 96,2 млн активных частных клиентов и 2,6 млн активных корпоративных клиентов, именно в этом году было принято запустить свою криптовалюту.</h1>
+          </div>
+        </div>
+      </section>
+      <div class="info" id="info">
+        <div class="container">
+          <div class="info__inner">
+            <div class="info__card">
+              <div class="info__text-box">
+                <p class="info__name">Что же это такое ?</p>
+                <p class="info__text">Сберкоин - первая криптовалюта в истории РФ.</p>
+              </div>
+              <img src="img/info/01.svg" alt="info image 1" width="232" height="206" class="info__img" />
+            </div>
+            <div class="info__card">
+              <div class="info__text-box">
+                <p class="info__name">Как на этом можно заработать?</p>
+                <p class="info__text">Сберкоин продается с июля 2021. К июлю 2022 цена предположительно вырастет в 11 раз</p>
+              </div>
+              <img src="img/info/02.svg" alt="info image 2" width="232" height="206" class="info__img" />
+            </div>
+            <div class="info__card">
+              <div class="info__text-box">
+                <p class="info__name">Как можно приобрести монету?</p>
+                <p class="info__text">Нужно подать заявку на сайте и ответить на звонок менеджеру. Если Вы подходите под критерии, Вам предлагают приобрести монет на сумму от 200$</p>
+              </div>
+              <img src="img/info/03.svg" alt="info image 3" width="232" height="206" class="info__img" />
+            </div>
+            <div class="info__card">
+              <div class="info__text-box">
+                <p class="info__name">Какие преимущества для первых покупателей?</p>
+                <p class="info__text">При покупке монеты от 200$ пользователю дается доступ в программу Сберкоин+</p>
+              </div>
+              <img src="img/info/04.svg" alt="info image 4" width="232" height="206" class="info__img" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <section class="calc" id="calc">
+        <div class="container">
+          <div class="calc__inner">
+            <h1 class="calc__heading">Калькулятор</h1>
+            <form method="POST" class="calc-form calc__calc-form">
+              <div class="calc-form__head">
+                <p class="calc-form__head-text">Выберите продукт:</p>
+                <label class="custom-radio calc-form__custom-radio">
+                  <input class="custom-radio__radio" type="radio" name="chooseproduct" value="spot" checked />
+                  <span class="custom-radio__button">Спотовый счет</span>
+                </label>
+                <label class="custom-radio calc-form__custom-radio">
+                  <input class="custom-radio__radio" type="radio" name="chooseproduct" value="fu" />
+                  <span class="custom-radio__button">Фьючерсы</span>
+                </label>
+              </div>
+              <div class="calc-form__body">
+                <div class="calc-form__ranges-box">
+                  <div class="calc-form__ranges-item">
+                    <div class="calc-form__ranges-row">
+                      <div class="calc-form__ranges-name">Сколько хотите заработать ?</div>
+                      <div class="calc-form__ranges-value calc-form__investment-value">4 000</div>
+                    </div>
+                    <div class="calc-form__ranges-row">
+                      <div class="custom-range">
+                        <input type="range" class="custom-range__input" name="inv" min="4000" max="1000000" step="1000" value="4000" />
+                        <div class="custom-range__btn"></div>
+                        <div class="custom-range__progress-bar"></div>
+                      </div>
+                    </div>
+                    <div class="calc-form__ranges-row">
+                      <div class="calc-form__ranges-text calc-form__inv-from">от 4 000 $</div>
+                      <div class="calc-form__ranges-text">до 1 000 000 $</div>
+                    </div>
+                  </div>
+                  <div class="calc-form__ranges-item">
+                    <div class="calc-form__ranges-row">
+                      <div class="calc-form__ranges-name">Срок инвестирования</div>
+                      <div class="calc-form__ranges-value calc-form__period-value">1 мес</div>
+                    </div>
+                    <div class="calc-form__ranges-row">
+                      <div class="custom-range">
+                        <input type="range" class="custom-range__input" name="yrs" min="1" max="60" step="1" value="1" />
+                        <div class="custom-range__btn"></div>
+                        <div class="custom-range__progress-bar"></div>
+                      </div>
+                    </div>
+                    <div class="calc-form__ranges-row">
+                      <div class="calc-form__ranges-text">от 1 месяца</div>
+                      <div class="calc-form__ranges-text">до 5 лет</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="calc-form__result-box">
+                  <div class="calc-form__result-item">
+                    <div class="calc-form__result-name">Сумма инвестирования</div>
+                    <div class="calc-form__result-value">15 000 $</div>
+                  </div>
+                  <button class="button calc-form__button">
+                    <span class="button__content">
+                      <span class="button__text">Подать заявку</span>
+                      <img src="img/arrow-right.svg" alt="arrow right direction" width="16" height="16" class="button__icon" />
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </form>
+            <p class="calc__text">Предварительный расчет. Не является публичной офертой</p>
+          </div>
+        </div>
+      </section>
+      <section class="big-info" id="big-info">
+        <div class="container">
+          <div class="big-info__inner">
+            <div class="big-info__text-box">
+              <h1 class="big-info__heading">Сберкоин+</h1>
+              <p class="big-info__text">
+                Это технология автотрейдинга, разработанная Сбербанком. Она позволяет зарабатывать на акциях, индексах и на 84 видах криптовалют. Сейчас программа используется в 12 крупных лицензированных брокерах СНГ и Европы. Технология сделана на основе нового блокчейна Сбербанка, что оптимизирован для сверхбыстрой торговли. В совокупности с искусственным интеллектом, который анализирует инфополе и изменение котировок опционов в ста самых влиятельных биржах мира, алгоритм позволяет в 98,3%
+                случаях проделывать успешные сделки. Для остальных почти 2% в финансовом отделе брокера работают профессиональные аналитики со стажем более 10 лет.
+              </p>
+            </div>
+            <div class="big-info__img-box">
+              <img src="img/coins.svg" alt="coins" width="418" height="312" class="big-info__img" />
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="exchange-rate" id="exchange-rate">
+        <div class="container">
+          <div class="exchange-rate__inner">
+            <h1 class="exchange-rate__heading">Курсы валют</h1>
+            <p class="exchange-rate__text">Актуально на 16:01, 01 июня 2021г.</p>
+            <div class="exchange-rate__content">
+              <div class="exchange-rate__info">
+                <div class="exchange-rate__row">
+                  <div class="exchange-rate__column"></div>
+                  <div class="exchange-rate__column">
+                    <p class="exchange-rate__text">Продаю</p>
+                  </div>
+                  <div class="exchange-rate__column">
+                    <p class="exchange-rate__text">Покупаю</p>
+                  </div>
+                </div>
+                <div class="exchange-rate__row">
+                  <div class="exchange-rate__column">
+                    <div class="exchange-rate__name">USD</div>
+                  </div>
+                  <div class="exchange-rate__column">
+                    <div class="exchange-rate__name exchange-rate-usd-sell">71,35 <img src="img/arrow-icon--red.svg" alt="arrow icon" width="18" height="11" class="arrow-icon exchange-rate__arrow-icon" /></div>
+                  </div>
+                  <div class="exchange-rate__column">
+                    <div class="exchange-rate__name exchange-rate-usd-buy">74,34 <img src="img/arrow-icon--green.svg" alt="arrow icon" width="18" height="11" class="arrow-icon exchange-rate__arrow-icon" /></div>
+                  </div>
+                </div>
+                <div class="exchange-rate__row">
+                  <div class="exchange-rate__column">
+                    <div class="exchange-rate__name">EUR</div>
+                  </div>
+                  <div class="exchange-rate__column">
+                    <div class="exchange-rate__name exchange-rate-eur-sell">85,04 <img src="img/arrow-icon--green.svg" alt="arrow icon" width="18" height="11" class="arrow-icon exchange-rate__arrow-icon" /></div>
+                  </div>
+                  <div class="exchange-rate__column">
+                    <div class="exchange-rate__name exchange-rate-eur-buy">88,04 <img src="img/arrow-icon--red.svg" alt="arrow icon" width="18" height="11" class="arrow-icon exchange-rate__arrow-icon" /></div>
+                  </div>
+                </div>
+              </div>
+              <form class="exchange-form exchange-rate__exchange-form">
+                <div class="exchange-form__item">
+                  <div class="exchange-form__name">Хочу продать</div>
+                  <div class="exchange-form__input-box">
+                    <input type="number" class="exchange-form__input" name="inputsell" placeholder="10 000" />
+                    <label class="exchange-form__select-label">
+                      <select class="exchange-form__select" name="selectsell">
+                        <option value="rub" selected>РУБ</option>
+                        <option value="eur">EUR</option>
+                        <option value="usd">USD</option>
+                      </select>
+                      <img src="img/arrow-down--black.svg" alt="arrow down black" width="22" height="12" class="exchange-form__select-marker" />
+                    </label>
+                  </div>
+                </div>
+                <div class="exchange-form__item">
+                  <div class="exchange-form__name">Получу</div>
+                  <div class="exchange-form__input-box">
+                    <input type="number" class="exchange-form__input" name="inputbuy" placeholder="115,90" />
+                    <label class="exchange-form__select-label">
+                      <select class="exchange-form__select" name="selectbuy"></select>
+                      <img src="img/arrow-down--black.svg" alt="arrow down black" width="22" height="12" class="exchange-form__select-marker" />
+                    </label>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="license" id="license">
+        <div class="container">
+          <div class="license__inner">
+            <div class="license__text-box">
+              <h1 class="license__heading">Лицензия использования Сберкоин+ в биржевой деятельности</h1>
+            </div>
+            <div class="license__show-more-box">
+              <img src="img/license.png" alt="license" width="528" height="748" class="license__img" />
+              <button class="license__show-more-btn">
+                <img src="img/arrow-down.svg" alt="arrow down" width="74" height="40" />
+                <span>Развернуть</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="steps" id="steps">
+        <div class="container">
+          <div class="steps__inner">
+            <h1 class="steps__heading">Как инвестировать ?</h1>
+            <div class="steps__content">
+              <div class="steps__item">
+                <h2 class="steps__name">Шаг 1</h2>
+                <p class="steps__text">Оставьте заявку на сайтe</p>
+              </div>
+              <div class="steps__item">
+                <h2 class="steps__name">Шаг 2</h2>
+                <p class="steps__text">Консультация с аналитиком и инвестиции от $200 для работы Сберкоин+</p>
+              </div>
+            </div>
+            <div class="steps__img-box">
+              <img src="img/way.svg" alt="way" width="1046" height="392" class="steps__way-img" />
+              <img src="img/how.svg" alt="how" width="334" height="252" class="steps__il-img" />
+            </div>
+            <div class="steps__content steps__content--reversed">
+              <div class="steps__item">
+                <h2 class="steps__name">Шаг 4</h2>
+                <p class="steps__text">Приумножать инвестиции с Сберкоин+</p>
+              </div>
+              <div class="steps__item">
+                <h2 class="steps__name">Шаг 3</h2>
+                <p class="steps__text">Настройка автоматической системы под Ваши запросы</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="request">
+        <div class="container">
+          <div class="request__inner">
+            <div class="request__text-box">
+              <h1 class="request__heading">Получай дивиденды от 4000$ в неделю</h1>
+              <p class="request__text">Исследуйте доступные возможности децентрализованных приложений</p>
+            </div>
+            <form method="POST" class="form request__form form--dark">
+              <label class="form__label">
+                <span class="form__name">ФИО</span>
+                <input type="text" class="form__input" placeholder="Иван Иванович" />
+              </label>
+              <label class="form__label">
+                <span class="form__name">Email</span>
+                <input type="text" class="form__input" placeholder="ivan@gmail.com" />
+              </label>
+              <label class="form__label">
+                <span class="form__name">Телефон</span>
+                <input type="tel" class="form__input" placeholder="+1 1234 5678" />
+              </label>
+              <button class="button form__button">
+                <span class="button__content">
+                  <span class="button__text">Отправить</span>
+                  <img src="img/arrow-right.svg" alt="arrow right direction" width="16" height="16" class="button__icon" />
+                </span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- root end -->
+    <!-- footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__inner">
+          <div class="footer__column">
+            <div class="logo footer__logo">
+              <a href="#" class="logo__link">
+                <img src="img/logo.svg" alt="logo image" width="164" height="32" class="logo__img" />
+              </a>
+            </div>
+            <p class="footer__copyright">©SbercoinOne2021</p>
+          </div>
+          <div class="footer__column">
+            <a href="#info" class="footer__link">Преимущества</a>
+            <a href="#calc" class="footer__link">Калькулятор</a>
+            <a href="#exchange-rate" class="footer__link">Курсы валют</a>
+          </div>
+          <div class="footer__column">
+            <a href="#big-info" class="footer__link">Сберкоин+</a>
+            <a href="#license" class="footer__link">Лицензия</a>
+            <a href="#steps" class="footer__link">Как инвестировать</a>
+          </div>
+          <div class="footer__column">
+            <a href="#" class="footer__link">Политика конфиденциальности</a>
+            <a href="#" class="footer__link">Правила использования</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- footer end -->
+    <!-- scripts -->
+    <script src="js/main.js"></script>
+    <!-- scripts end -->
+  </body>
+</html>
