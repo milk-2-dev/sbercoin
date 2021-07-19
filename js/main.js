@@ -1,46 +1,194 @@
-//preloader
-let preloader = document.querySelector('.preloader');
-setTimeout(()=>{
-	preloader.classList.add('preloader--close');
-	setTimeout(()=>{
-		preloader.style.display = 'none';
-	}, 500)
-}, 2000)
+(function () {
+  var self = window.mainController || {};
+  window.mainController = self;
 
+  //  variables
+  let $preloader
+  let header
+  let burgerBtn,
+    menu,
+    menuItems
 
-window.addEventListener(
-  "scroll",
-  () => {
-    let header = document.querySelector(".header");
-    header.classList.toggle("header--sticky", window.scrollY > 0);
-  },
-  { passive: true }
-);
+  //  initialization
+  function onDocumentReady() {
+    $preloader = document.querySelector('.preloader');
+    self.preloaderHide()
 
-let burgerBtn = document.querySelector(".burger"),
-  menu = document.querySelector(".menu"),
-  menuItems = document.querySelectorAll(".menu__item");
+    header = document.querySelector(".header");
 
-burgerBtn.addEventListener("click", () => {
-  if (!burgerBtn.classList.contains("burger--active")) {
-    openMenu();
-  } else {
-    closeMenu();
+    window.addEventListener("scroll", () => {
+      toggleHeaderState()
+    }, {passive: true});
+
+    burgerBtn = document.querySelector(".burger")
+    menu = document.querySelector(".menu")
+    menuItems = document.querySelectorAll(".menu__item")
+
+    burgerBtn.addEventListener("click", () => {
+      onBurgerBtnClick()
+    });
+
+    menuItems.forEach((el) => {
+      el.addEventListener("click", burgerMenuHide);
+    });
+
+    initPhoneInputs()
+
+    $('#form1SubmitBtn').on('click', () => {
+      onClickBtnSubmit('form1')
+    })
+
+    // $.validator.addMethod("validNumber", function (value, element, params) {
+    //   var obj = params.object;
+    //   if (obj.isValidNumber()) {
+    //     var num = obj.getNumber().replace('+', '');
+    //     console.log(num);
+    //     $(element).closest("form").find(".hidden-phone").val(num);
+    //   }
+    //   return obj.isValidNumber();
+    // }, 'Введите правильный номер!');
+
   }
-});
 
-function openMenu() {
-  burgerBtn.classList.add("burger--active");
-  menu.classList.add("menu--active");
-}
-function closeMenu() {
-  burgerBtn.classList.remove("burger--active");
-  menu.classList.remove("menu--active");
-}
+  if (document.readyState !== 'loading') {
+    onDocumentReady();
+  } else {
+    document.addEventListener('DOMContentLoaded', onDocumentReady);
+  }
 
-menuItems.forEach((el) => {
-  el.addEventListener("click", closeMenu);
-});
+  //  events
+  const onClickBtnSubmit = (formId) => {
+    // $('#' + formId).validate({
+    //   rules: {
+    //     firstName: {
+    //       required: true,
+    //       minlength: 1,
+    //       messages: {
+    //         required: "Required input",
+    //         minlength: jQuery.validator.format("Please, at least {0} characters are necessary")
+    //       }
+    //     },
+    //     email: {
+    //       required: true,
+    //       email: true,
+    //       messages: {
+    //         required: "Это поле обязательное"
+    //       }
+    //     },
+    //     phone: {
+    //       required: true,
+    //       messages: {
+    //         required: "Это поле обязательное"
+    //       }
+    //     }
+    //   }
+    // });
+
+    $('#' + formId).validate({
+      rules: {
+        firstName: {
+          required: true,
+          minlength: 5,
+        },
+      },
+      messages: {
+        firstName: {
+          required: "Поле ФИО обязательное",
+          minlength: "Пиши нормально давай"
+        }
+      }
+    });
+  }
+
+  const onBurgerBtnClick = () => {
+    if (!burgerBtn.classList.contains("burger--active")) {
+      burgerMenuShow();
+    } else {
+      burgerMenuHide();
+    }
+  }
+
+  //  methods
+  const initPhoneInputs = () => {
+    const $allTelInputs = $('.form__input[type="tel"]').get();
+
+    $allTelInputs.forEach((item) => {
+      window.intlTelInput(item, {
+        autoHideDialCode: false,
+        autoPlaceholder: "aggressive",
+        placeholderNumberType: "MOBILE",
+        separateDialCode: true,
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/js/utils.min.js",
+        initialCountry: "auto",
+        geoIpLookup: function (success, failure) {
+          $.get("https://ipinfo.io", function () {
+          }, "jsonp").always(function (resp) {
+            var countryCode = (resp && resp.country) ? resp.country : "ua";
+            success(countryCode);
+
+            setTimeout(() => {
+              createInputClone(item)
+            }, 500)
+
+          });
+        },
+      });
+    })
+  }
+
+  const createInputClone = (item) => {
+    const $newInput = $(item).clone()
+
+    $(item).after($newInput)
+    $(item).attr('id', null)
+
+    $(item).css('visibility', 'hidden')
+    $(item).css('display', 'none')
+
+    initNewMask(item)
+
+    $(item).on("countrychange", function (e, countryData) {
+      initNewMask(item)
+      
+    });
+    refreshphoneInput(item)
+  }
+
+  const initNewMask = (item) => {
+    const $nextInput = $(item).next()
+    $nextInput.val('');
+    $nextInput.attr('placeholder', $(item).attr('placeholder'))
+    $nextInput.mask($(item).attr('placeholder').replace(/[1-9]/g, 0));
+  }
+
+  const refreshphoneInput = (item) => {
+    const padding = $(item).css('padding-left')
+    $(item).next().css('padding-left', padding)
+  }
+
+  function burgerMenuShow() {
+    burgerBtn.classList.add("burger--active");
+    menu.classList.add("menu--active");
+  }
+
+  function burgerMenuHide() {
+    burgerBtn.classList.remove("burger--active");
+    menu.classList.remove("menu--active");
+  }
+
+  const toggleHeaderState = () => {
+    header.classList.toggle("header--sticky", window.scrollY > 0);
+  }
+
+  self.preloaderShow = () => {
+    $preloader.classList.remove('preloader--close');
+    $preloader.style.display = 'block';
+  }
+  self.preloaderHide = () => {
+    $preloader.classList.add('preloader--close');
+    $preloader.style.display = 'none';
+  }
+})()
 
 //license
 let licenseBtn = document.querySelector(".license__show-more-btn"),
@@ -130,14 +278,14 @@ function calculateExchangeSell() {
   if (currentSellValue === "rub") {
     let currentBuyPrice = exchangeData[currentBuyValue].buy;
     inputBuy.value = (+currentSellInputValue / currentBuyPrice).toFixed(2);
-  } else if (currentBuyValue === 'rub'){
-		 let currentSellPrice = exchangeData[currentSellValue].sell;
-		 inputBuy.value = (+currentSellInputValue * currentSellPrice).toFixed(2);
-	} else {
-		let toRub = +currentSellInputValue * exchangeData[currentSellValue].sell;
-		let toAnother = toRub / exchangeData[currentBuyValue].buy;
-		inputBuy.value = toAnother.toFixed(2);
-	}
+  } else if (currentBuyValue === 'rub') {
+    let currentSellPrice = exchangeData[currentSellValue].sell;
+    inputBuy.value = (+currentSellInputValue * currentSellPrice).toFixed(2);
+  } else {
+    let toRub = +currentSellInputValue * exchangeData[currentSellValue].sell;
+    let toAnother = toRub / exchangeData[currentBuyValue].buy;
+    inputBuy.value = toAnother.toFixed(2);
+  }
 }
 function calculateExchangeBuy() {
   let currentSellValue = selectSell.value;
@@ -157,10 +305,10 @@ function calculateExchangeBuy() {
     let currentBuyPrice = exchangeData[currentSellValue].sell;
     inputSell.value = (+currentBuyInputValue / currentBuyPrice).toFixed(2);
   } else {
-		let toRub = +currentBuyInputValue * exchangeData[currentBuyValue].buy;
+    let toRub = +currentBuyInputValue * exchangeData[currentBuyValue].buy;
     let toAnother = toRub / exchangeData[currentSellValue].sell;
     inputSell.value = toAnother.toFixed(2);
-	}
+  }
 }
 function exchangeHandler() {
   renderExchangeBuyOptions();
@@ -175,8 +323,8 @@ inputBuy.addEventListener("input", calculateExchangeBuy);
 //custom range
 let ranges = document.querySelectorAll('.custom-range');
 
-function rangeHandler(inputRange){
-	let input = inputRange.querySelector(".custom-range__input");
+function rangeHandler(inputRange) {
+  let input = inputRange.querySelector(".custom-range__input");
   let btn = inputRange.querySelector(".custom-range__btn");
   let progress = inputRange.querySelector(".custom-range__progress-bar");
   let min = input.getAttribute("min");
@@ -185,7 +333,7 @@ function rangeHandler(inputRange){
   let vars = Number(max) - Number(min);
   let stepPerc = 100 / (vars / Number(step));
 
-	const value = (Number(input.value) - min) / step;
+  const value = (Number(input.value) - min) / step;
   const valuePerc = value * stepPerc;
   btn.style.left = valuePerc + "%";
   progress.style.maxWidth = valuePerc + "%";
@@ -199,52 +347,52 @@ function rangeHandler(inputRange){
 }
 
 
-for (let i = 0; i < ranges.length; ++i){
-	rangeHandler(ranges[i]);
+for (let i = 0; i < ranges.length; ++i) {
+  rangeHandler(ranges[i]);
 }
 
 //Калькулятор
 
 //Формула расчета суммы инвестирования
-function invFormula(money, months, coefficient){
-	return Math.round((money / months) * coefficient);
+function invFormula(money, months, coefficient) {
+  return Math.round((money / months) * coefficient);
 }
 
 //Функция для превращения чисел в читаемый формат. Пример 4000 -> 4 000
-function formatNum(number){
-	number = Number(number);
-	return number.toLocaleString("ru");
+function formatNum(number) {
+  number = Number(number);
+  return number.toLocaleString("ru");
 }
 
 //Функция для превращения месяцев в формат год месяц
-function formatMonths(months){
+function formatMonths(months) {
 
-	const years = Math.floor(months / 12);
-	months -= (years * 12);
+  const years = Math.floor(months / 12);
+  months -= (years * 12);
 
-	const yearsLetters = {
-		'1': 'год', 
-		'2': 'года', 
-		'3': 'года', 
-		'4': 'года', 
-		'5': 'лет', 
-		'6': 'лет', 
-		'7': 'лет', 
-		'8': 'лет', 
-		'9': 'лет', 
-		'0': 'лет', 
-	}
-	if (years !== 0 && months !== 0) return String(years) + " " + yearsLetters[years] + " " + String(months) + " " + "мес";
-	if (years === 0) return String(months) + " " + "мес";
-	if (months === 0) return String(years) + " " + yearsLetters[years];
+  const yearsLetters = {
+    '1': 'год',
+    '2': 'года',
+    '3': 'года',
+    '4': 'года',
+    '5': 'лет',
+    '6': 'лет',
+    '7': 'лет',
+    '8': 'лет',
+    '9': 'лет',
+    '0': 'лет',
+  }
+  if (years !== 0 && months !== 0) return String(years) + " " + yearsLetters[years] + " " + String(months) + " " + "мес";
+  if (years === 0) return String(months) + " " + "мес";
+  if (months === 0) return String(years) + " " + yearsLetters[years];
 
-	return 0
+  return 0
 }
 
 //Продукты
 let products = {
 
-	//Спотовый счет
+  //Спотовый счет
   spot: {
     from: 4000,
 
@@ -252,7 +400,7 @@ let products = {
     perc: 3.75,
   },
 
-	//Фьючерсы
+  //Фьючерсы
   fu: {
     from: 7000,
 
@@ -272,27 +420,27 @@ let resultBlock = calcForm.querySelector(".calc-form__result-value");
 
 
 //Обработчик калькулятора
-function calcFormHandler(){
+function calcFormHandler() {
 
-	const investmentValue = investmentRange.value;
-	const periodValue = periodRange.value;
-	const coef = products[chooseProduct.value].perc;
+  const investmentValue = investmentRange.value;
+  const periodValue = periodRange.value;
+  const coef = products[chooseProduct.value].perc;
 
-	investmentValueBlock.textContent = formatNum(investmentValue);
-	periodValueBlock.textContent = formatMonths(periodValue);
+  investmentValueBlock.textContent = formatNum(investmentValue);
+  periodValueBlock.textContent = formatMonths(periodValue);
 
-	resultBlock.textContent = formatNum(invFormula(investmentValue, periodValue, coef)) + ' $';
+  resultBlock.textContent = formatNum(invFormula(investmentValue, periodValue, coef)) + ' $';
 }
 calcFormHandler();
 
-function chooseProductHandler(){
+function chooseProductHandler() {
 
-	investmentFromBlock.textContent = 'от ' + formatNum(products[chooseProduct.value].from) + ' $';
-	investmentRange.min = products[chooseProduct.value].from;
-	investmentRange.value = products[chooseProduct.value].from;
+  investmentFromBlock.textContent = 'от ' + formatNum(products[chooseProduct.value].from) + ' $';
+  investmentRange.min = products[chooseProduct.value].from;
+  investmentRange.value = products[chooseProduct.value].from;
 
-	rangeHandler(investmentRange.parentElement);
-	calcFormHandler();
+  rangeHandler(investmentRange.parentElement);
+  calcFormHandler();
 }
 
 
@@ -300,5 +448,5 @@ investmentRange.addEventListener("input", calcFormHandler);
 periodRange.addEventListener("input", calcFormHandler);
 
 chooseProduct.forEach(el => {
-	el.addEventListener("change", chooseProductHandler);
+  el.addEventListener("change", chooseProductHandler);
 })
