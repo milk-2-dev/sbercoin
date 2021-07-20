@@ -35,10 +35,6 @@
     initPhoneInputs()
 
     initFormSubmit()
-
-    // $('#form1SubmitBtn').on('click', () => {
-    //   onClickBtnSubmit('form1')
-    // })
   }
 
   if (document.readyState !== 'loading') {
@@ -126,7 +122,7 @@
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/js/utils.min.js",
         initialCountry: "auto",
         geoIpLookup: function (success, failure) {
-          $.get("https://ipinfo.io/109.251.142.7/?token=e9d24aa930676a", function () {
+          $.get("https://ipinfo.io/", function () {
           }, "jsonp")
             .always(function (resp) {
               var countryCode = (resp && resp.country) ? resp.country : "ua";
@@ -134,24 +130,28 @@
             });
 
         },
-      })
+        customPlaceholder: function (selectedCountryPlaceholder, selectedCountryData) {
+          if (item.style.display !== "none") {
+            createInputClone(item)
+          }
 
-      setTimeout(() => {
-        createInputClone(item)
-      }, 1700)
+          initNewMask(item, selectedCountryPlaceholder)
+
+          return selectedCountryPlaceholder
+        }
+      })
 
       $(item).data("itiInputInstance", itiInst)
     })
   }
 
   const createInputClone = (item) => {
-    console.log(item)
     const $newInput = $(item).clone()
 
     $(item).after($newInput)
 
     $newInput.on('keyup', (event) => {
-      $(item).data("itiInputInstance").setNumber($(event.target).val())
+      $(item).val($(event.target).val())
     })
 
     $(item).attr('id', null)
@@ -159,20 +159,14 @@
     $(item).css('visibility', 'hidden')
     $(item).css('display', 'none')
 
-    initNewMask(item)
-
-    $(item).on("countrychange", function (e, countryData) {
-      initNewMask(item)
-    });
-
     refreshphoneInput(item)
   }
 
-  const initNewMask = (item) => {
+  const initNewMask = (item, placeholder) => {
     const $nextInput = $(item).next()
     $nextInput.val('');
-    $nextInput.attr('placeholder', $(item).attr('placeholder'))
-    $nextInput.mask($(item).attr('placeholder').replace(/[1-9]/g, 0));
+    $nextInput.attr('placeholder', placeholder)
+    $nextInput.mask(placeholder.replace(/[1-9]/g, 0));
   }
 
   const refreshphoneInput = (item) => {
