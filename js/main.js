@@ -34,20 +34,11 @@
 
     initPhoneInputs()
 
-    $('#form1SubmitBtn').on('click', () => {
-      onClickBtnSubmit('form1')
-    })
+    initFormSubmit()
 
-    // $.validator.addMethod("validNumber", function (value, element, params) {
-    //   var obj = params.object;
-    //   if (obj.isValidNumber()) {
-    //     var num = obj.getNumber().replace('+', '');
-    //     console.log(num);
-    //     $(element).closest("form").find(".hidden-phone").val(num);
-    //   }
-    //   return obj.isValidNumber();
-    // }, 'Введите правильный номер!');
-
+    // $('#form1SubmitBtn').on('click', () => {
+    //   onClickBtnSubmit('form1')
+    // })
   }
 
   if (document.readyState !== 'loading') {
@@ -57,48 +48,10 @@
   }
 
   //  events
-  const onClickBtnSubmit = (formId) => {
-    // $('#' + formId).validate({
-    //   rules: {
-    //     firstName: {
-    //       required: true,
-    //       minlength: 1,
-    //       messages: {
-    //         required: "Required input",
-    //         minlength: jQuery.validator.format("Please, at least {0} characters are necessary")
-    //       }
-    //     },
-    //     email: {
-    //       required: true,
-    //       email: true,
-    //       messages: {
-    //         required: "Это поле обязательное"
-    //       }
-    //     },
-    //     phone: {
-    //       required: true,
-    //       messages: {
-    //         required: "Это поле обязательное"
-    //       }
-    //     }
-    //   }
-    // });
+  // const onClickBtnSubmit = (formId) => {
+  //   $('#' + formId).submit()
 
-    $('#' + formId).validate({
-      rules: {
-        firstName: {
-          required: true,
-          minlength: 5,
-        },
-      },
-      messages: {
-        firstName: {
-          required: "Поле ФИО обязательное",
-          minlength: "Пиши нормально давай"
-        }
-      }
-    });
-  }
+  // }
 
   const onBurgerBtnClick = () => {
     if (!burgerBtn.classList.contains("burger--active")) {
@@ -109,11 +62,63 @@
   }
 
   //  methods
+  const initFormSubmit = () => {
+    $('.submitBtn').on('click', (event) => {
+      event.preventDefault()
+
+      const $formValidateInstance = $(event.target).closest('form').validate({
+        rules: {
+          firstName: {
+            required: true
+          },
+          email: {
+            required: true,
+            email: true
+          },
+          phone: {
+            required: true,
+            validNumber: {
+              object: $(event.target).closest('form').find('input[name="phone"]')[0]
+            }
+          }
+        },
+        messages: {
+          firstName: {
+            required: "Необходимо обязательно заполнить поле ФИО",
+            digits: "ФИО не может содержать цифры",
+          },
+          email: {
+            required: "Необходимо обязательно заполнить поле Email",
+            email: "Пожалуйста введите валидный Email, например example@domain.com",
+          },
+          phone: {
+            required: "Необходимо обязательно заполнить поле Телефон",
+          }
+        }
+      })
+
+      $formValidateInstance.form()
+
+      if ($formValidateInstance.valid()) {
+        console.log('valid')
+      } else {
+        console.log('Ne valid')
+      }
+    })
+
+    $.validator.addMethod("validNumber", function (value, element, params) {
+      var obj = params.object;
+      const itiInstance = $(obj).data("itiInputInstance")
+
+      return itiInstance.isValidNumber();
+    }, 'Введите правильный номер!');
+  }
+
   const initPhoneInputs = () => {
     const $allTelInputs = $('.form__input[type="tel"]').get();
 
     $allTelInputs.forEach((item) => {
-      window.intlTelInput(item, {
+      const itiInst = window.intlTelInput(item, {
         autoHideDialCode: false,
         autoPlaceholder: "aggressive",
         placeholderNumberType: "MOBILE",
@@ -121,25 +126,34 @@
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.3/js/utils.min.js",
         initialCountry: "auto",
         geoIpLookup: function (success, failure) {
-          $.get("https://ipinfo.io", function () {
-          }, "jsonp").always(function (resp) {
-            var countryCode = (resp && resp.country) ? resp.country : "ua";
-            success(countryCode);
+          $.get("https://ipinfo.io/109.251.142.7/?token=e9d24aa930676a", function () {
+          }, "jsonp")
+            .always(function (resp) {
+              var countryCode = (resp && resp.country) ? resp.country : "ua";
+              success(countryCode);
+            });
 
-            setTimeout(() => {
-              createInputClone(item)
-            }, 500)
-
-          });
         },
-      });
+      })
+
+      setTimeout(() => {
+        createInputClone(item)
+      }, 1700)
+
+      $(item).data("itiInputInstance", itiInst)
     })
   }
 
   const createInputClone = (item) => {
+    console.log(item)
     const $newInput = $(item).clone()
 
     $(item).after($newInput)
+
+    $newInput.on('keyup', (event) => {
+      $(item).data("itiInputInstance").setNumber($(event.target).val())
+    })
+
     $(item).attr('id', null)
 
     $(item).css('visibility', 'hidden')
@@ -149,8 +163,8 @@
 
     $(item).on("countrychange", function (e, countryData) {
       initNewMask(item)
-      
     });
+
     refreshphoneInput(item)
   }
 
@@ -184,6 +198,7 @@
     $preloader.classList.remove('preloader--close');
     $preloader.style.display = 'block';
   }
+
   self.preloaderHide = () => {
     $preloader.classList.add('preloader--close');
     $preloader.style.display = 'none';

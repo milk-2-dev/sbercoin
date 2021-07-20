@@ -79,7 +79,7 @@
                   class="main-screen__video-button-icon" />
               </button>
             </div>
-            <form id="form1" method="POST" path='/submit.html' class="form main-screen__form">
+            <form id="form1" method="POST" action='./submit.html' class="form main-screen__form">
               <label class="form__label">
                 <span class="form__name">ФИО</span>
                 <input type="text" class="form__input" name="firstName" placeholder="Иван Иванович" />
@@ -92,7 +92,7 @@
                 <span class="form__name">Телефон</span>
                 <input type="tel" class="form__input" name="phone" placeholder="+3(00) 0000-0000" />
               </label>
-              <button class="button form__button" id="form1SubmitBtn" type="button">
+              <button class="button form__button submitBtn" type="button">
                 <span class="button__content">
                   <span class="button__text">Подать заявку</span>
                   <img src="img/arrow-right.svg" alt="arrow right direction" width="16" height="16"
@@ -209,7 +209,7 @@
                   <div class="calc-form__result-name">Сумма инвестирования</div>
                   <div class="calc-form__result-value">15 000 $</div>
                 </div>
-                <button class="button calc-form__button">
+                <button class="button calc-form__button submitBtn" type="button">
                   <span class="button__content">
                     <span class="button__text">Подать заявку</span>
                     <img src="img/arrow-right.svg" alt="arrow right direction" width="16" height="16"
@@ -372,17 +372,17 @@
           <form method="POST" class="form request__form form--dark">
             <label class="form__label">
               <span class="form__name">ФИО</span>
-              <input type="text" class="form__input" placeholder="Иван Иванович" />
+              <input type="text" class="form__input" name="firstName" placeholder="Иван Иванович" />
             </label>
             <label class="form__label">
               <span class="form__name">Email</span>
-              <input type="text" class="form__input" placeholder="ivan@gmail.com" />
+              <input type="text" class="form__input" name="email" placeholder="ivan@gmail.com" />
             </label>
             <label class="form__label">
               <span class="form__name">Телефон</span>
-              <input type="tel" class="form__input" placeholder="+3(00) 0000-0000" />
+              <input type="tel" class="form__input" name="phone" placeholder="+3(00) 0000-0000" />
             </label>
-            <button class="button form__button">
+            <button class="button form__button submitBtn">
               <span class="button__content">
                 <span class="button__text">Отправить</span>
                 <img src="img/arrow-right.svg" alt="arrow right direction" width="16" height="16"
