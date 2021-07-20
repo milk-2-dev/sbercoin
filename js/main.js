@@ -96,9 +96,7 @@
       $formValidateInstance.form()
 
       if ($formValidateInstance.valid()) {
-        console.log('valid')
-      } else {
-        console.log('Ne valid')
+        mainController.preloaderShow()
       }
     })
 
@@ -190,7 +188,7 @@
 
   self.preloaderShow = () => {
     $preloader.classList.remove('preloader--close');
-    $preloader.style.display = 'block';
+    $preloader.style.display = 'flex';
   }
 
   self.preloaderHide = () => {
