@@ -472,9 +472,11 @@
 
   &__custom-radio {
     margin-right: 8px;
+    margin-bottom: 8px;
 
     &:nth-last-child(1) {
       margin-right: 0;
+      margin-bottom: 0;
     }
   }
 
@@ -597,6 +599,10 @@
     width: 100%;
     border-radius: 100px;
     background: #C4C4C4;
+
+    ::-webkit-slider-thumb {
+      display: none;
+    }
 
     &::-webkit-slider-thumb {
       -webkit-appearance: none;

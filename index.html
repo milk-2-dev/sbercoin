@@ -62,7 +62,7 @@
   <!-- header -->
   <!-- root -->
   <div id="root">
-    <section class="main-screen test">
+    <section class="main-screen" id="mainScreen">
       <div class="container">
         <div class="main-screen__inner">
           <div class="main-screen__text-box">
@@ -154,7 +154,7 @@
       <div class="container">
         <div class="calc__inner">
           <h1 class="calc__heading">Калькулятор</h1>
-          <form method="POST" class="calc-form calc__calc-form">
+          <form class="calc-form calc__calc-form">
             <div class="calc-form__head">
               <p class="calc-form__head-text">Выберите продукт:</p>
               <label class="custom-radio calc-form__custom-radio">
@@ -209,7 +209,7 @@
                   <div class="calc-form__result-name">Сумма инвестирования</div>
                   <div class="calc-form__result-value">15 000 $</div>
                 </div>
-                <button class="button calc-form__button submitBtn" type="button">
+                <button class="button calc-form__button scrollToFormBtn" data-href="#mainScreen" type="button">
                   <span class="button__content">
                     <span class="button__text">Подать заявку</span>
                     <img src="img/arrow-right.svg" alt="arrow right direction" width="16" height="16"
