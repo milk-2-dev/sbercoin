@@ -600,10 +600,6 @@
     border-radius: 100px;
     background: #C4C4C4;
 
-    ::-webkit-slider-thumb {
-      display: none;
-    }
-
     &::-webkit-slider-thumb {
       -webkit-appearance: none;
       cursor: pointer;
@@ -611,6 +607,7 @@
       height: 24px;
       position: relative;
       z-index: 3;
+      visibility: hidden;
     }
   }
 
