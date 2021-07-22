@@ -828,14 +828,14 @@
     -webkit-appearance: none;
     -moz-appearance: none;
 
-    &[name="selectsell"] {
+    // &[name="selectsell"] {
       background-image: url('../img/arrow-down--black.svg');
       background-repeat: no-repeat;
       background-size: 16px 10px;
       background-position: center right;
       padding-right: 32px;
       cursor: pointer;
-    }
+    // }
   }
 }
 
